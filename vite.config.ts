@@ -1,7 +1,9 @@
 import { sentrySvelteKit } from "@sentry/sveltekit";
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import { config } from 'dotenv';
 
+config()
 
 export default defineConfig({
     plugins: [sentrySvelteKit({
@@ -11,14 +13,15 @@ export default defineConfig({
             org: "zipper-school",
             project: "sourcemap",
             authToken: process.env.SENTRY_AUTH_TOKEN,
-            sourcemaps: {
-                filesToDeleteAfterUpload: [`./svelte-kit/**/*.map`]
-            }
-            // unstable_sentryVitePluginOptions: {
-            //     sourcemaps: {
-            //         filesToDeleteAfterUpload: [`./svelte-kit/**/*.map`]
-            //     }
+            // sourcemaps: {
+            //     filesToDeleteAfterUpload: [`./**/*.map`]
             // }
+            unstable_sentryVitePluginOptions: {
+                sourcemaps: {
+                    assets: ['.svelte-kit'],
+                    filesToDeleteAfterUpload: [`./svelte-kit/**/*.map`]
+                }
+            }
         },
     }), sveltekit()]
 });
