@@ -1,6 +1,6 @@
 # Sentry Sourcemaps upload + delete bug
 
-### Config + Error for when using `unstable_sentryVitePluginOptions`
+### Config + Error
 
 ```ts
 export default defineConfig({
